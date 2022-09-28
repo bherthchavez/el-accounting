@@ -36,32 +36,50 @@
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-              <form id="billForm" name="billForm" action="/create-supplier-bill" method="post">
-                <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
-                  <%suppFound.forEach(function(supp){%>
-                  <label class="form-selectgroup-item flex-fill">
-                    <input type="radio" name="form-payment" value="<%=supp._id%>" class="form-selectgroup-input" required/>
-                    <div class="form-selectgroup-label d-flex align-items-center p-3">
-                      <div class="me-3">
-                        <span class="form-selectgroup-check"></span>
+              <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+
+              <% if (suppFound != '') { %>
+
+                  <form id="billForm" name="billForm">
+                   
+                      <%suppFound.forEach(function(supp){%>
+                      <label class="form-selectgroup-item flex-fill">
+                        <input type="radio" name="form-payment" value="<%=supp._id%>" class="form-selectgroup-input" required/>
+                        <div class="form-selectgroup-label d-flex align-items-center p-3">
+                          <div class="me-3">
+                            <span class="form-selectgroup-check"></span>
+                          </div>
+                          <div>
+                            <%=supp.supplier_name%>
+                          </div>
+                        </div>
+                      </label>
+                      <%})%>
+                
+                  <div class="mt-4 text-end">
+                    <input type="text" id="selelectedSupp" name="accountID" class="form-control" hidden>
+                      <a href="/create-bill/" class="btn btn-primary w-50 fs-3 createBill" > Create bill <i class="ti ti-chevron-right fs-3 ms-2"></i></a>
+                    </form>
+                    
+               <% } else { %>   
+
+                    <div class="empty">
+                      <div class="text-center  my-5">
+                        <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                        <h1 class="text-secondary">Ohh!</h1>
+                        <p class="text-secondary"> No supplier found in the database!</p>
                       </div>
-                      <div>
-                         <%=supp.supplier_name%>
+                      <div class="empty-action">
+        
+                        <a  href="/supplier-accounts" class="btn btn-primary">
+                          <i class="ti ti-plus fs-4 fw-light me-2"></i>
+                         Create supplier account
+                        </a>
                       </div>
                     </div>
-                  </label>
-  
-                  <%})%>
-  
+
+                 <% } %> 
                 </div>
-             
-              <div class="mt-4 text-end">
-                <input type="text" id="selelectedSupp" name="accountID" class="form-control" hidden>
-  
-                  <button type="submit" class="btn btn-primary w-50 fs-3 " >
-                  Create bill <i class="ti ti-chevron-right fs-3 ms-2"></i>
-                  </button>
-                </form>
               </div>
             </div>
     </div>
@@ -89,8 +107,9 @@
             <div class="card-header">
                 <h3>Cost Centers Expenses - 2022</h3>
             </div>
-            <div class="table-responsive"  style="max-height: 15rem">
-            <table class="table card-table table-vcenter">
+            <div class="table-responsive"  style="max-height: 18rem">
+             <% if (foundcC != '') { %>
+              <table class="table card-table table-vcenter">
               <thead>
                 <tr>
                   <th>Cost Center</th>
@@ -112,6 +131,13 @@
                 <%})%>
               </tbody>
             </table>
+            <% } else { %>
+              <div class="text-center  my-5">
+                <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                <h1 class="text-secondary">Ohh!</h1>
+                <small class="text-secondary"> No cost centers expenses found in the database!</small>
+              </div>
+             <% } %> 
           </div>
           </div>
         </div>
@@ -156,15 +182,19 @@
                         <div class="col">
                           <div class="fw-bold fs-1">
                             <span class="text-muted fs-5 fw-normal">QAR</span>
-                            <%  var sumOfCC = 0 %>
-                            <%  voucherItems.forEach(function(item){ %>
-                              <%  if(item.payment_mode !="Bank Transfer"){ %>
-                              <%  sumOfCC += + item.total_payment %>
-                              <% } %>
-                              <%  }) %>
-                            
-                              <%= (sumOfCC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
-                           
+                            <% if (voucherItems != '') { %>
+
+                                <%  var sumOfCC = 0 %>
+                                <%  voucherItems.forEach(function(item){ %>
+                                  <%  if(item.payment_mode !="Bank Transfer"){ %>
+                                  <%  sumOfCC += + item.total_payment %>
+                                  <% } %>
+                                  <%  }) %>
+                                
+                                  <%= (sumOfCC).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
+                              <% } else { %>
+                                0.0
+                              <% } %> 
                           </div>
                           <div class="text-muted">
                             Total Cash and Cheque
@@ -189,14 +219,19 @@
                          
                           <div class="fw-bold fs-1">
                             <span class="text-muted fs-5 fw-normal">QAR</span>
-                            <%  var sumOfBT = 0 %>
-                            <%  voucherItems.forEach(function(item){ %>
-                              <%  if(item.payment_mode ==="Bank Transfer"){ %>
-                              <%  sumOfBT += + item.total_payment %>
-                              <% } %>
-                              <%  }) %>
-                              <%= (sumOfBT).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
-                        
+                            <% if (voucherItems != '') { %>
+
+                                <%  var sumOfBT = 0 %>
+                                <%  voucherItems.forEach(function(item){ %>
+                                  <%  if(item.payment_mode ==="Bank Transfer"){ %>
+                                  <%  sumOfBT += + item.total_payment %>
+                                  <% } %>
+                                  <%  }) %>
+                                  <%= (sumOfBT).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
+                           
+                              <% } else { %>
+                                0.0
+                              <% } %> 
                           </div>
                           <div class="text-muted">
                             Total Bank Transfer
@@ -221,12 +256,17 @@
                          
                           <div class="fw-bold fs-1">
                             <span class="text-muted fs-5 fw-normal">QAR</span>
-                            <%  var sumOfTotal = 0 %>
-                            <%  voucherItems.forEach(function(item){ %>
-                              <%  sumOfTotal += + item.total_payment %>
-                              <%  }) %>
-                              <%=  (sumOfTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
+                            <% if (voucherItems != '') { %>
                               
+                                <%  var sumOfTotal = 0 %>
+                                <%  voucherItems.forEach(function(item){ %>
+                                  <%  sumOfTotal += + item.total_payment %>
+                                  <%  }) %>
+                                  <%=  (sumOfTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %>
+                          
+                             <% } else { %>
+                                0.0
+                              <% } %> 
                           </div>
                           <div class="text-muted">
                             Total Withdrawal
@@ -261,6 +301,7 @@
             <div class="card-table table-responsive">
 
               <div class="table-responsive"  style="max-height: 30rem">
+                <% if (voucherItems != '') { %>
                 <table class="table card-table table-vcenter text-nowrap datatable">
                   <thead>
                     <tr>
@@ -272,7 +313,6 @@
                       <th>Amount</th>
                       <th>Created By</th>
                       <th>Status</th>
-                     
                     </tr>
                   </thead>
                   <tbody id="payVoucher" >
@@ -323,6 +363,13 @@
                     <%  }) %>
                   </tbody>
                 </table>
+                <% } else { %>
+                  <div class="text-center  my-5">
+                    <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                    <h1 class="text-secondary">Ohh!</h1>
+                    <p class="text-secondary"> No payment transaction found in the database!</p>
+                  </div>
+              <% } %> 
               </div>
               <div class="card-footer d-flex align-items-center">
               </div>
@@ -397,7 +444,7 @@
 
           $("#billForm").on("click",function() { 
             var radVal =   $("input[name='form-payment']:checked").val();
-                $("#selelectedSupp").val(radVal)
+                $("a.createBill").attr("href","create-bill/"+radVal)
              
             });
 
@@ -425,7 +472,10 @@
              let dataArray = [];
              let [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec] =  Array(12).fill(0); 
 
-        '<%  voucherItems.forEach(function(item){ %>'
+       
+    ' <% if (voucherItems != "") { %>'
+
+       '<%  voucherItems.forEach(function(item){ %>'
          
         var dMonth = new Date('<%=item.date%>').getMonth() + 1;
 
@@ -480,6 +530,7 @@
         }
         
         ' <%  }) %>'
+        ' <%  } %>'
             
               dataArray[0] = jan;
               dataArray[1] = feb;
@@ -509,7 +560,7 @@
                                   opacity: 0.3
                                 },
                    fontFamily: 'inherit',
-                   height: 260,
+                   height: 300,
                    parentHeightOffset: 0,
                    toolbar: {
                        show: false,
@@ -586,7 +637,7 @@
                            var scaled = number / scale;
    
                            // format number and add suffix
-                           return 'QAR ' + scaled.toFixed(1) + suffix;
+                           return scaled.toFixed(1) + suffix;
                                }
                            },
                },

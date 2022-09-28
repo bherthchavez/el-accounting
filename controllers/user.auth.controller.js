@@ -10,8 +10,6 @@ const passport =require("passport");
 
 module.exports = {
    
- 
-  
      signIn: (req, res)=>{   
 
         res.render('sign-in', {
@@ -29,12 +27,22 @@ module.exports = {
             password: req.body.password
           });
     
-        req.login(user, function(err){
+        req.login(user, (err) =>{
           if(err){
             console.log(err);
             
           }else{
-            passport.authenticate("local", { failureRedirect: '/incorrect-user'})(req, res, function(){
+            req.session.message = {
+              message: "Incorrect login credential",
+              type: "warning"
+          };
+
+            passport.authenticate("local", { failureRedirect: '/sign-in'})(req, res, ()=>{
+            
+              req.session.user = {
+                userName: req.user.name, 
+                userRole: req.user.userRole 
+            };
               res.redirect("/");
             });
           
@@ -45,16 +53,11 @@ module.exports = {
 
         logoutUser: (req, res)=>{   
 
-            req.logout(function(err) {
+            req.logout((err) =>{
                 if (err) { return next(err); }
                 res.redirect('/');
               });
                 
         },
         
-        incorrectUser : (req, res)=>{
-        
-            res.render("sign-in", {title: "Incorrect User", alert: 1});
-          
-        }
 }

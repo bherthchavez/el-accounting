@@ -7,13 +7,18 @@ const path = require('path');
 const passportLocalMongoose = require("passport-local-mongoose");
 const passport =require("passport");
 
+
+
 module.exports = {
+  
   
     viewDashboard: (req, res)=>{
 
+     
+
      if (req.isAuthenticated()){
 
-        PaymentVoucher.find().sort({created_at:-1}).exec( function(err, foundItem){
+        PaymentVoucher.find().sort({created_at:-1}).exec( (err, foundItem) =>{
             if (err){
               console.log(err);
             }else{
@@ -45,23 +50,26 @@ module.exports = {
                   console.log(errCc);
                 }else{
       
-                    SupplierAccount.find({}, function(errbill, suppFound){
+                    SupplierAccount.find((errbill, suppFound) =>{
                         if(err){
                           console.log(errbill)
                         }else{
       
-                            SupplierAccount.find({created_bills:{ $gte: 1 } }, function(errpay, suppPay){
+                            SupplierAccount.find({created_bills:{ $gte: 1 } }, (errpay, suppPay) =>{
                             if(err){
                               console.log(errpay)
                             }else{
+
                              
-                                res.render('index',{title: "EL - Accounting - Dashboard", 
+                              let nav = {
+                                title: "Dashboard",
+                               };
+                              
+                                res.render('index',{title: "EL - Accounting - Dashboard", nav: nav, 
                                 suppPay: suppPay, 
                                 suppFound:suppFound,
                                 foundcC:foundcC, 
-                                voucherItems: foundItem, 
-                                userName: req.user.name, 
-                                userRole: req.user.userRole });
+                                voucherItems: foundItem});
                                
                               }
                             })

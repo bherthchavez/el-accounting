@@ -1,6 +1,6 @@
 {
   "name": "el-accounting",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "v.2 of w-portal",
   "main": "server.js",
   "scripts": {

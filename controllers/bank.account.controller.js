@@ -3,107 +3,105 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = {
+
     addBankAcc : (req, res) =>{
-        const bAcc = new bank_account({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            image: req.file.filename
-        });
-        bAcc.save((err)=>{
-            if(err){
-                res.json({message: err.message, type: 'danger'});
-            }else{
-                req.session.message = {
-                    type: 'success',
-                    message: 'User added successfully!',
-                };
-                res.redirect('/');
-            }
-        });
+        if (req.isAuthenticated()){
+
+                const balanceAmount = + (req.body.openingBalance).split(',').join('');
+
+                const bAcc = new BankAccount({
+                    bank_name: req.body.bankName,
+                    account_name: req.body.ownerName,
+                    account_number: req.body.accountNumber,
+                    account_type: req.body.accountType,
+                    bank_email: req.body.bankEmail,
+                    deposited: balanceAmount,
+                    withdrawal: 0,
+                    balance_amount: balanceAmount,
+                    created_by: req.user.name,
+                    updated_at: Date.now()
+                });
+                bAcc.save((err)=>{
+                    if(err){
+                        res.json({message: err.message, type: 'danger'});
+                    }else{
+                        req.session.message = {
+                            type: 'success',
+                            message: 'Bank account added successfully!',
+                        };
+                        res.redirect('/bank-accounts');
+                    }
+                });
+
+        }else{
+            res.redirect("/sign-in");
+        }
     },
+
     viewBankAcc: (req, res)=>{
-        res.render('index', {title: "Home Page" })
-        // bank_account.find().exec((err, users)=>{
-        //     if(err){
-        //         res.json({message: err.message});
-        //     }else{
-            
-        //         res.render('index', {
-        //             title: "Home Page",
-        //             users: users
-        //         })
-        //     }
-        // });
+        if (req.isAuthenticated()){
+
+                BankAccount.find().exec((err, accounts)=>{
+                    if(err){
+                        res.json({message: err.message});
+                    }else{
+                        let nav = {
+                            title: "Accounts",
+                            child: "Bank",
+                        };
+                    
+                        res.render('bank-accounts', {
+                            title: "Bank Accounts",
+                            bankAccount: accounts,
+                            nav: nav
+                        })
+                    }
+                });
+
+        }else{
+            res.redirect("/sign-in");
+        }   
+
     },
-    getEditBankAcc: (req, res) =>{
-        let id = req.params.id;
-        bank_account.findById(id, (err, user)=>{
-            if(err){
-                res.redirect('/');
-            }else{
-                if(user == null){
-                    res.redirect('/');
-                }else{
-                    res.render('edit_user', {
-                        title: "Edit User", 
-                        user: user
-                    });
-                }
-            }
-        });
-    },
-    editBankAcc: (req, res)=>{
+
+    updateBankAcc: (req, res)=>{
+
          let id = req.params.id;
-         let new_image = '';
          
 
-         if(req.file){
-             new_image = req.file.filename;
-             try{
-                 fs.unlinkSync('./uploads/' + req.body.old_image);
-             }catch (err){
-                 console.log(err);
-             }
-         }else{
-             new_image = req.body.old_image;
-         }
-
-         bank_account.findByIdAndUpdate(id, {
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            image: new_image
+         BankAccount.findByIdAndUpdate(id, {
+            bank_name:  req.body.bankName,
+            account_name:  req.body.ownerName,
+            account_number: req.body.accountNumber, 
+            account_type:  req.body.accountType,
+            bank_email: req.body.bankEmail,
+            updated_at: Date.now()
          }, (err, result)=>{
             if(err){
                 res.json({message: err.message, type: 'danger'});
             }else{
                 req.session.message = {
                     type: 'success',
-                    message: 'User updated successfully!'
+                    message: 'Bank account updated successfully!'
                 };
-                res.redirect('/')
+               
+                res.redirect('/bank-accounts')
             }
          });
     },
+
     deleteBankAcc : (req, res)=>{
         let id = req.params.id
-        bank_account.findByIdAndRemove(id, (err, result)=>{
-            if(result.image !=""){
-                try{
-                    fs.unlinkSync('./uploads/' + result.image);
-                }catch(err){
-                    console.log(err);
-                }
-            }
+        BankAccount.findByIdAndRemove(id, (err, result)=>{
+            
             if(err){
                 res.json({message: err.message});
             }else{
                 req.session.message = {
                     type: 'info',
-                    message: 'User deleted successfully!',
+                    message: 'Bank account deleted successfully!',
                 };
-                res.redirect('/')
+                res.redirect('/bank-accounts')
             }
 
         })

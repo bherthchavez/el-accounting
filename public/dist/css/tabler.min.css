@@ -7858,6 +7858,9 @@ fieldset:disabled .btn {
 .font-monospace {
     font-family: var(--tblr-font-monospace) !important
 }
+.fs--1 {
+    font-size: 3rem !important
+}
 
 .fs-1 {
     font-size: 1.5rem !important
@@ -21099,7 +21102,7 @@ img {
     position: fixed;
     margin: auto;
     z-index: 1021;
-    max-width: 300px;
+    max-width: 350px;
     top: 20px;
     right: 20px;
 }

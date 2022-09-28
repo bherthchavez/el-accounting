@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const _ = require("lodash");
-const { get, parseInt } = require("lodash");
+const { get, parseInt, replace } = require("lodash");
 
 const sesion = require('express-session');
 const passport =require("passport");
@@ -20,7 +20,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(sesion({
-    secret: "secret",
+    secret: process.env.HIMA,
     saveUninitialized: true,
     resave: false
 }));  
@@ -32,6 +32,11 @@ app.use((req, res, next)=>{
     delete req.session.message;
     next();
 });
+
+app.use((req, res, next)=>{
+    res.locals.user = req.session.user;
+});
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 

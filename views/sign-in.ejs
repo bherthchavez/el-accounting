@@ -28,10 +28,16 @@
             <h2 class="card-title text-center mb-3 text-muted">Login to your account</h2>
            
            
-
-            <div class="d-block text-warning text-truncate mt-n1 fs-5  xpass mb-3 invisible">
-              Incorrect login credential
-            </div>
+            <% if (message) { %>
+              <div class="alert alert-<%= message.type %> alert-dismissible" role="alert">
+                <div class="d-flex">
+                  <div>
+                    <h4 class="alert-title"><%= message.message %></h4>
+                  </div>
+                </div>
+                <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+              </div>
+             <% } %>
 
             <div class="form-floating mb-3">
               <input type="text"  name="username" class="form-control" id="floating-input" required autofocus>
@@ -55,16 +61,6 @@
     <!-- Tabler Core -->
     <script src="./dist/js/tabler.min.js" defer></script>
     <script src="./dist/js/demo.min.js" defer></script>
-  
-  <script>
-      var getAlert = "<%= alert %>";
-      if(getAlert == 1){
-      $(".xpass").removeClass("invisible");
-    
-      }
-      console.log(getAlert)
-    </script>
-    
 
 <script>
   $(document).ready(function(){
