@@ -41,7 +41,9 @@ app.use((req, res, next)=>{
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect("mongodb://localhost:27017/accountingDB", {useNewUrlParser: true});
+// mongoose.connect("mongodb://localhost:27017/accountingDB", {useNewUrlParser: true});
+
+mongoose.connect("mongodb+srv://admin-bherth:Test123@cluster0.hjeikps.mongodb.net/accountingDB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
 
 
 const PORT = process.env.PORT || 1234;
