@@ -29,7 +29,7 @@ module.exports = {
     
         req.login(user, (err) =>{
           if(err){
-            console.log(err);
+            res.json({message: err.message, type: 'danger'});
             
           }else{
             req.session.message = {

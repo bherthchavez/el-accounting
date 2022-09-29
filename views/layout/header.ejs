@@ -19,7 +19,7 @@
   <body>
     <div class="page">
       <div class="sticky-top">
-        <header class="navbar navbar-expand-md navbar-light d-print-none sticky-top">
+        <header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
           <div class="container-xl">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
               <span class="navbar-toggler-icon"></span>
@@ -30,6 +30,17 @@
               </a>
             </h1>
             <div class="navbar-nav flex-row order-md-last">
+             
+              
+                <div class="nav-item dropdown d-none d-md-flex me-3">
+                  <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Enable dark mode">
+                    <i class="ti ti-moon fs-2"></i> 
+                  </a>
+                  <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Enable light mode">
+                    <i class="ti ti-sun-high fs-2"></i>
+                  </a>
+                 
+                </div>
               <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                   <span class="avatar avatar-sm" style="background-image: url(../static/avatars/user-avatar.png)"></span>
@@ -109,8 +120,8 @@
                     <span class="nav-link-title">Settings</span>
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item <%- (nav.title) == 'Settings' && (nav.child) == 'User Management' ?  'active' : ''  %>" href="/users">User Management</a>
-                    <a class="dropdown-item <%- (nav.title) == 'Settings' && (nav.child) == 'Master' ?  'active' : ''  %>" href="/master">Maste </a>
+                    <!-- <a class="dropdown-item <%- (nav.title) == 'Settings' && (nav.child) == 'User Management' ?  'active' : ''  %>" href="/users">User Management</a> -->
+                    <a class="dropdown-item <%- (nav.title) == 'Settings' && (nav.child) == 'Master' ?  'active' : ''  %>" href="/master">Master </a>
                      <a class="dropdown-item <%- (nav.title) == 'Settings' && (nav.child) == 'System Settings' ?  'active' : ''  %>" href="/system-settings">System Settings</a>
                   </div>
                 </li>

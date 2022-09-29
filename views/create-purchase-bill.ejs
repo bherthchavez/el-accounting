@@ -15,7 +15,7 @@
       </div>
     </div>
    
-    <form action="/supplier-bill" method="post">
+    <form action="/supplier-bill" method="post" id="add-form" enctype="multipart/form-data">
 
     <div class="page-body">
       <div class="container-xl">
@@ -58,7 +58,7 @@
                               <div class="mb-3"> 
                                 <div class="mb-3">
                                 <div class="form-label">Upload Documents</div>
-                                <input type="file" name="documents" class="form-control" required>
+                                <input type="file" name="documents" class="form-control" required>                        
                               </div>
                               </div>
                             </div>
@@ -182,7 +182,6 @@
                         </a>
                         
                         <input type="submit" name="submit" value="Save Bill" class="btn btn-primary ms-3"/>
-
                       
                       </div>
                     </div>
@@ -195,7 +194,7 @@
       </div>
     </div>
   
-  </form>
+    </form>
     
      <script>
       $(document).ready(function(){

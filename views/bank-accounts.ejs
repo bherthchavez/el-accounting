@@ -102,11 +102,11 @@
                           <td>
                             <div class="details-header"> Deposited </div>
                             <div class="currency-formated">QAR</div> 
-                            <div class="number-details"> <%= (account.balance_amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
+                            <div class="number-details text-success "> <%= (account.balance_amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
                            
                             <div class="details-header"> Withdrawal </div>
                             <div class="currency-formated">QAR</div> 
-                            <div class="number-details"> <%= (account.withdrawal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
+                            <div class="number-details text-danger"> <%= (account.withdrawal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
 
                           </td>
                           <td>

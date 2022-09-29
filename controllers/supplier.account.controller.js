@@ -1,7 +1,6 @@
+
 const SupplierAccount = require('../models/SupplierAccount');
-const ChartOfAccount = require('../models/ChartOfAccount');
-const CostCenter = require('../models/CostCenter');
-const Settings = require('../models/Settings');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -136,75 +135,6 @@ module.exports = {
         }else{
             res.redirect("/sign-in");
         } 
-    },
-
-    cBillSuppAcc : (req, res)=>{
-        if (req.isAuthenticated()){
-
-            let id = req.params.id
-
-            ChartOfAccount.find().exec((err, chartOfAccount)=>{
-                if(err){
-                console.log(err);
-                }else{
-                
-                    CostCenter.find().exec((err, costCenter)=>{
-                    if (err){
-                    console.log(err);
-                    }else{
-
-                        SupplierAccount.findById(id, (err, foundItem)=>{
-                            if (err){
-                            console.log(err);
-                            }else{
-
-                                SupplierAccount.find().exec((err, foundSupplier)=>{
-                                
-                                Settings.findOne({name: "bill_settings"}, (err, billSetting)=>{
-                                    if (err) {
-                                    console.log(err);
-                                    }else{
-                                    let puvno = billSetting.prefix + billSetting.starting_no;
-                                    let nav = {
-                                        title: "Accounts",
-                                        child: "Suppliers"
-                                    };
-
-                                    res.render('create-purchase-bill', {title: "Create Supplier Bill",
-                                        nav: nav,
-                                        foundSupplier:foundSupplier, 
-                                        puvno: puvno, 
-                                        chartAccounts: chartOfAccount, 
-                                        costCenter: costCenter,
-                                        accountID:foundItem._id,
-                                        supplierName: foundItem.supplier_name, 
-                                        aName: foundItem.a_name, 
-                                       
-                                         });
-                                    }
-                                
-                                });
-                                });
-                            }
-                        });
-                    
-                    }
-                });
-                }
-            });
-
-        }else{
-            res.redirect("/sign-in");
-        } 
-    },
-
-    supplierBill : (req, res)=>{
-        if (req.isAuthenticated()){
-
-            res.redirect('/supplier-accounts')
-
-        }else{
-            res.redirect("/sign-in");
-        } 
     }
+
 }

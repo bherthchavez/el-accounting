@@ -115,13 +115,10 @@
                               
 
                               
-                                  <a href="/create-bill/<%= account._id %>" class="btn btn-outline-success btn-sm btn-pill"> Create Bill </a>
+                                  <a href="/create-bill/<%= account._id %>" id="createBill" class="btn btn-outline-success btn-sm btn-pill"> Create Bill </a>
                             
+                                  <a href="/pay-bill/<%=account._id%>" id="payBill" class="btn btn-outline-warning btn-sm btn-pill ms-2"> Pay Bill </a> 
                               
-                        
-                                <form action="/pay-supplier-bill" method="post">
-                                  <button type="submit" id="payBill<%=account._id%>" name="accountID" value="<%=account._id%>" class="btn btn-outline-warning btn-sm btn-pill ms-2"> Pay Bill </button> 
-                                </form>
                               </div>
                               </td>
                             </tr>
