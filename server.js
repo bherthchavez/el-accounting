@@ -51,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect("mongodb+srv://admin-bherth:Test123@cluster0.hjeikps.mongodb.net/accountingDB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
 
 
-const PORT = process.env.PORT || 1234;
 
 // route prefix
 app.use('', require('./routes/routes'));
@@ -60,4 +59,13 @@ app.get('/', (req, res)=>{
     res.json({message: "test on"});
 })
 
-app.listen(PORT, ()=> console.log('Running on port: ' + PORT));
+ // Serrver setup -------------------------//
+
+ let port = process.env.PORT;
+ if (port == null || port == "") {
+   port = 3000;
+ }
+
+app.listen(port, function(){
+console.log("Server running on port: " + port);
+});
