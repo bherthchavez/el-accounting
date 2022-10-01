@@ -1,6 +1,4 @@
 const BankAccount = require('../models/BankAccount');
-const fs = require('fs');
-const path = require('path');
 
 module.exports = {
 

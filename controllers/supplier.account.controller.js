@@ -1,9 +1,6 @@
 
 const SupplierAccount = require('../models/SupplierAccount');
 
-const fs = require('fs');
-const path = require('path');
-
 module.exports = {
 
     addSuppAcc : (req, res) =>{

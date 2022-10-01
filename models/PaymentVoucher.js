@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const payment_vouchersSchema = new mongoose.Schema({
+let payment_vouchersSchema = new mongoose.Schema({
     payment_voucher_no: {
         type:  String,
         required: true,
@@ -25,6 +25,30 @@ const payment_vouchersSchema = new mongoose.Schema({
         type:  String,
         required: true,
     },
+    bank_transfer: [{
+        b_name:  String,
+        b_address: String,
+        payment_from:  String,
+        bank_name:  String,
+        iban_no:  String,
+        swift_code:   String,
+        transfer_charge: String,
+        transfer_purpose: String,
+        currency: String,
+        amount: Number,
+        amountInWords: String,
+        transfer_amount: Number
+    }],
+
+    cheque: [{
+       
+        cheque_no:  String,
+        beneficiary_name:  String,
+        cheque_date:  String,
+        cheque_status:  String,
+        cheque_amount:  Number,
+    }],
+
     date: {
         type:  String,
         required: true,

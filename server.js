@@ -38,6 +38,11 @@ app.use((req, res, next)=>{
     next();
 });
 
+app.use((req, res, next)=>{
+    res.locals.settingsAlert = req.session.settingsAlert;
+    delete req.session.settingsAlert;
+    next();
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 

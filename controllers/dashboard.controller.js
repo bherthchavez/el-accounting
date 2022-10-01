@@ -1,13 +1,6 @@
-const PaymentVoucher = require('../models/PaymentVoucher');
+let PaymentVoucher = require('../models/PaymentVoucher');
 const CostCenter = require('../models/CostCenter');
 const SupplierAccount = require('../models/SupplierAccount');
-const User = require('../models/User');
-const fs = require('fs');
-const path = require('path');
-const passportLocalMongoose = require("passport-local-mongoose");
-const passport =require("passport");
-
-
 
 module.exports = {
   
@@ -48,14 +41,13 @@ module.exports = {
       
                     SupplierAccount.find((errbill, suppFound) =>{
                         if(err){
-                          res.json({message: err.message, type: 'danger'});
+                          res.json({message: errbill.message, type: 'danger'});
                         }else{
       
                             SupplierAccount.find({created_bills:{ $gte: 1 } }, (errpay, suppPay) =>{
                             if(errpay){
                               res.json({message: errpay.message, type: 'danger'});
                             }else{
-
                              
                               let nav = {
                                 title: "Dashboard",

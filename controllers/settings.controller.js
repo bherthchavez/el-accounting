@@ -3,9 +3,14 @@ const CostCenter = require('../models/CostCenter');
 const ChartOfAccounts = require('../models/ChartOfAccount');
 const Settings = require('../models/Settings');
 const PurposeTransfer = require('../models/PurposeTransfer');
+const SupplierBill = require('../models/Supplier-Bill');
+const PaymentVoucher = require('../models/PaymentVoucher');
 
-const fs = require('fs');
-const path = require('path');
+
+let alertSetBill;
+let alertSetPay;
+
+
 
 module.exports = {
 
@@ -396,28 +401,6 @@ module.exports = {
  //--------------------------------------------------------  SYSTEM SETTINGS //
     viewSysSettings : (req, res) =>{
         if (req.isAuthenticated()){
-
-            // const settings1 = new Settings({
-            //     name: "bill_settings",
-            //     prefix: "#PUV/2022/",
-            //     starting_no: "100",
-            //     created_by: "Admin",
-            //     created_at: Date.now(),
-            //     updated_at: Date.now()
-            //   });
-              
-            //   const settings2 = new Settings({
-            //     name: "payment_voucher_settings",
-            //     prefix: "#PAV/2022/",
-            //     starting_no: "100",
-            //     created_by: "Admin",
-            //     created_at: Date.now(),
-            //     updated_at: Date.now()
-            //   });
-
-            // const defaultSettings = [settings1,settings2];
-
-           
           
                     Settings.findOne({name: "bill_settings"}, (err, billSetting)=>{
                         
@@ -434,20 +417,99 @@ module.exports = {
                                         title: "Settings",
                                         child: "System Settings"
                                     };
+                                    
 
                                     res.render('system-settings', {title: "Settings - System Settings",
                                     nav: nav,
                                     billSetting: billSetting,
-                                    PAVSetting:PAVSetting, 
-                                    alert: 0, 
-                                    alertSetBill: 0, 
-                                    alertSetPay: 0,
+                                    PAVSetting:PAVSetting,
                                 });
 
                                 }
                             });
                         }
                     });
+               
+
+        }else{
+            res.redirect("/sign-in");
+        }
+    },
+
+    updateSysSettings : (req, res) =>{
+        if (req.isAuthenticated()){
+            
+            let billNo = req.body.billPrefix + req.body.billStartingNo;
+            let payNo =  req.body.payPrefix + req.body.payStartingNo;
+        
+            if (parseFloat(req.body.actualBillStartingNo) <= parseFloat(req.body.billStartingNo)){
+        
+                SupplierBill.find({bill_number: billNo}, (err, supBill)=>{ 
+                if (err){
+                    res.json({message: err.message});
+                }else{
+              
+        
+                  if(supBill.length === 0){
+        
+                    Settings.findOneAndUpdate({_id: req.body.billID},
+                      {$set: {prefix:  req.body.billPrefix,
+                        starting_no:  req.body.billStartingNo}}, (err)=>{
+                          if (err){
+                            res.json({message: err.message});
+                          }else{
+                                alertSetBill= 1;
+                          }
+                        
+                        });
+        
+                  }else{
+                    
+                    alertSetBill= 2;
+                  }
+                } 
+              });
+        
+            }else{
+                alertSetBill= 3;
+            }
+             
+            if (parseFloat(req.body.actualPayStartingNo) <= parseFloat(req.body.payStartingNo)){
+        
+        
+                PaymentVoucher.find({payment_voucher_no: payNo}, (err, payVouBill)=>{ 
+                  if (err){
+                    res.json({message: err.message});
+                  }else{
+        
+                    if(payVouBill.length === 0){
+        
+                        Settings.findOneAndUpdate({_id: req.body.payID},
+                          {$set: {prefix:  req.body.payPrefix,
+                          starting_no:  req.body.payStartingNo}}, (err2) =>{
+                            if (err2){
+                                res.json({message: err.message});
+                            } else {
+                                alertSetPay= 1;
+                            }
+                      });
+        
+                    }else{
+                        alertSetPay= 2;
+                    }
+                 }
+               });
+        
+            }else{
+                
+                alertSetPay= 3;
+            } 
+           
+            req.session.settingsAlert = {
+                alertSetPay: alertSetPay,
+                alertSetBill: alertSetBill,
+            };
+                res.redirect('/system-settings');
                
 
         }else{

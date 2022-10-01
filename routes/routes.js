@@ -14,6 +14,7 @@ router.post('/sign-in', user.checkUser);
 router.get('/logout', user.logoutUser);
 
 router.get('/system-settings', settings.viewSysSettings);
+router.post('/update-system-settings', settings.updateSysSettings);
 
 router.get('/master', settings.viewChartAcc);
 router.post('/add/account-ledger', settings.addChartAcc );
@@ -45,7 +46,7 @@ router.get('/pay-bill/:id', transactionController.paySuppBill);
 router.post('/supplier-bill',upload, transactionController.supplierBill);
 router.post('/pay-supplier',upload, transactionController.paySupplier);
 
-router.post('/print/bank-letter', transactionController.printLetter);
+router.get('/print-letter/:id', transactionController.printLetter);
 router.get('/print-voucher/:id', transactionController.printVoucher);
 
 module.exports = router;

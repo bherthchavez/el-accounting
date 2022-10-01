@@ -552,9 +552,9 @@
         var calculated_total_sum = 0;
       
         $("#tableAddAcc .chequeAmount").each(function () {
-            var get_textbox_value = $(this).val();
+            var get_textbox_value = + $(this).val().split(',').join('');
             if ($.isNumeric(get_textbox_value)) {
-                calculated_total_sum += parseFloat(get_textbox_value);
+                calculated_total_sum += get_textbox_value;
                 }                  
               });
                 $("div .totalAmount").html((calculated_total_sum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -567,9 +567,9 @@
           var calculated_total_sum = 0;
 
           $("#tableAddAcc .chequeAmount").each(function () {
-            var get_textbox_value = $(this).val();
+            var get_textbox_value = + $(this).val().split(',').join('');
             if ($.isNumeric(get_textbox_value)) {
-                calculated_total_sum += parseFloat(get_textbox_value);
+                calculated_total_sum += get_textbox_value;
                 }                  
               });
               $("div .totalAmount").html((calculated_total_sum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -583,9 +583,9 @@
         var calculated_total_sum = 0;
       
         $("#tableAddcash .chequeAmount").each(function () {
-            var get_textbox_value = $(this).val();
+            var get_textbox_value = + $(this).val().split(',').join('');
             if ($.isNumeric(get_textbox_value)) {
-                calculated_total_sum += parseFloat(get_textbox_value);
+                calculated_total_sum += get_textbox_value;
                 }                  
               });
                 $("div .totalAmount").html((calculated_total_sum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -597,9 +597,9 @@
           var calculated_total_sum = 0;
 
           $("#tableAddcash .chequeAmount").each(function () {
-            var get_textbox_value = $(this).val();
+            var get_textbox_value = + $(this).val().split(',').join('');
             if ($.isNumeric(get_textbox_value)) {
-                calculated_total_sum += parseFloat(get_textbox_value);
+                calculated_total_sum += get_textbox_value;
                 }                  
               });
               $("div .totalAmount").html((calculated_total_sum).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -610,7 +610,7 @@
      
         $("#bankAmount").keyup(()=>{
        
-          var bankAmount = parseFloat($("#bankAmount").val())
+          var bankAmount = + ($("#bankAmount").val().split(',').join(''))
        
           $(".bankTotal").text((bankAmount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')); 
           

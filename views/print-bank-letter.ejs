@@ -42,7 +42,8 @@
            
                 <div class="my-5">
                   <p class="h4">The Manager </p>
-                  <p class="h4"><%=foundItems.payment_from%></p>
+                  <p class="h4"><%=foundItems[0].payment_from%></p>
+                
                   <p class="h4">Doha-Qatar </p>
                 </div>
             </div>
@@ -82,8 +83,8 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.currency%>.  <%= parseFloat(foundItems.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></p>
-                <p class="fs-4 strong mb-1"> <%=foundItems.currency%>.   <%=foundItems.amountInWords%>%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].currency%>.  <%= parseFloat(foundItems[0].amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].currency%>.   <%=foundItems[0].amountInWords%></p>
 
               </td>
        
@@ -97,7 +98,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.transfer_charge%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].transfer_charge%></p>
               </td>
        
             </tr>
@@ -109,7 +110,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.b_name%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].b_name%></p>
               </td>
               
             </tr>
@@ -121,7 +122,7 @@
                 <p class="fs-4 strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.b_address%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].b_address%></p>
               </td>
               
             </tr>
@@ -133,7 +134,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.iban_no%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].iban_no%></p>
               </td>
             </tr>
             <tr>
@@ -144,7 +145,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"><%=foundItems.swift_code%></p>
+                <p class="fs-4 strong mb-1"><%=foundItems[0].swift_code%></p>
               </td>
          
             </tr>
@@ -156,7 +157,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.bank_name%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].bank_name%></p>
               </td>
      
             </tr>
@@ -168,7 +169,7 @@
                 <p class="strong">:</p>
               </td>
               <td>
-                <p class="fs-4 strong mb-1"> <%=foundItems.transfer_purpose%></p>
+                <p class="fs-4 strong mb-1"> <%=foundItems[0].transfer_purpose%></p>
               </td>
             
        
