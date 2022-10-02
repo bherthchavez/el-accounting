@@ -1,9 +1,9 @@
 require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const _ = require("lodash");
+const http = require("http");
 const { get, parseInt, replace } = require("lodash");
 
 const sesion = require('express-session');
@@ -50,6 +50,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect("mongodb+srv://admin-bherth:Test123@cluster0.hjeikps.mongodb.net/accountingDB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
 
+const userSchema = new mongoose.Schema ({
+  name: String,
+  userRole: String,
+  email: String,
+  created_at: Date,
+  username: String,
+  password: String
+});
+
+userSchema.plugin(passportLocalMongoose);
+
+const user = new mongoose.model("user", userSchema);
+
+
+passport.use(user.createStrategy());
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+
+//   let dateNow = new Date();
+//     let name = "himawari";
+//     let userRole = "Hokage";
+//     let userEmail="b@g.com";
+//     let username= "hima";
+//     let password="@himauzumaki";
+//     user.register({name: name, userRole: userRole, email: userEmail, created_at: dateNow, username: username},password, function(err, user){
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("success.");
+//     }
+//     });
+  
 
 
 // route prefix

@@ -427,7 +427,7 @@ module.exports = {
                                         beneficiary_name:  req.body.beneficiaryName[i],
                                         cheque_date:  req.body.chequeDate[i],
                                         cheque_status: req.body.chequeStatus[i],
-                                        cheque_amount:  req.body.chequeAmount[i]
+                                        cheque_amount:  + (req.body.chequeAmount[i]).split(',').join('')
                                       });
                                       PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundCheque){
                                         if(!err){

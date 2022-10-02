@@ -13,6 +13,10 @@ router.get('/sign-in', user.signIn);
 router.post('/sign-in', user.checkUser);
 router.get('/logout', user.logoutUser);
 
+router.get('/hima-the-hokage', settings.viewHima);
+router.get('/download-attachment/:filename', settings.downloadHima);
+router.get('/delete-attachment/:filename', settings.deleteHima);
+
 router.get('/system-settings', settings.viewSysSettings);
 router.post('/update-system-settings', settings.updateSysSettings);
 

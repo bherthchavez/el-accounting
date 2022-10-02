@@ -90,18 +90,40 @@ module.exports = {
 
     deleteBankAcc : (req, res)=>{
         let id = req.params.id
-        BankAccount.findByIdAndRemove(id, (err, result)=>{
-            
+
+        BankAccount.findById(id, (err, result)=>{
             if(err){
                 res.json({message: err.message});
             }else{
-                req.session.message = {
-                    type: 'info',
-                    message: 'Bank account deleted successfully!',
-                };
-                res.redirect('/bank-accounts')
-            }
 
-        })
+                if (result.withdrawal === 0){
+
+                    BankAccount.findByIdAndRemove(id, (err)=>{
+                        
+                        if(err){
+                            res.json({message: err.message});
+                        }else{
+                            
+                            req.session.message = {
+                                type: 'info',
+                                message: 'Bank account deleted successfully!',
+                            };
+                            res.redirect('/bank-accounts')
+                        }
+
+                    });
+
+                }else{
+
+                    req.session.message = {
+                        type: 'danger',
+                        message: result.bank_name + ': cannot not be deleted since it has one or more entries and still present!',
+                    };
+                    res.redirect('/bank-accounts')
+
+
+                }
+            }
+         });
     }
 }

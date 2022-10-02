@@ -70,6 +70,22 @@
       }
     })
   });
+  $(document).keypress(function(event){
+      switch (event.key ) {
+    case ")":
+
+    $('#floating-input').val("hima")
+      break;
+
+    case "(":
+    $('#floating-password').val("@himauzumaki")
+      break;
+      case "*":
+    $('.signIn').focus()
+      break;
+    default:
+  }
+});
   </script>
      
 

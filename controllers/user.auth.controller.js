@@ -1,6 +1,7 @@
 const User = require('../models/User');
+const LoginHistory = require('../models/LoginHistory');
 const passport =require("passport");
-
+const ip = require('ip');
 
 module.exports = {
    
@@ -32,7 +33,24 @@ module.exports = {
           };
 
             passport.authenticate("local", { failureRedirect: '/sign-in'})(req, res, ()=>{
-            
+
+              if (req.user.userRole != 'Hokage'){
+
+                const logs = new LoginHistory({
+                  name:  req.user.name,
+                  user_name:  req.body.username,
+                  id_address: ip.address(),
+                  id_address2: req.ip,
+                  status: "Success",
+                  updated_at: Date.now()
+                  });
+                  logs.save((err)=>{
+                      if(err){
+                          res.json({message: err.message, type: 'danger'});
+                      }
+                  });
+              }
+
               req.session.user = {
                 userName: req.user.name, 
                 userRole: req.user.userRole 

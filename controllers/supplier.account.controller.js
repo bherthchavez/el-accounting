@@ -115,17 +115,39 @@ module.exports = {
         if (req.isAuthenticated()){
 
             let id = req.params.id
-            SupplierAccount.findByIdAndRemove(id, (err, result)=>{
-                
+
+            SupplierAccount.findById(id, (err, result)=>{
                 if(err){
                     res.json({message: err.message});
                 }else{
-                    req.session.message = {
-                        type: 'info',
-                        message: 'Supplier account deleted successfully!',
-                    };
-                    res.redirect('/supplier-accounts')
-                }
+
+                    if (result.billed === 0 && result.paid === 0){
+
+                        SupplierAccount.findByIdAndRemove(id, (err)=>{
+                            
+                            if(err){
+                                res.json({message: err.message});
+                            }else{
+                                req.session.message = {
+                                    type: 'info',
+                                    message: 'Supplier account deleted successfully!',
+                                };
+                                res.redirect('/supplier-accounts')
+                            }
+
+                        });
+
+                    }else{
+
+                        req.session.message = {
+                            type: 'danger',
+                            message: result.supplier_name + ': cannot not be deleted since it has one or more entries and still present!',
+                        };
+                        res.redirect('/supplier-accounts')
+
+                    }
+
+                    }
 
             });
 

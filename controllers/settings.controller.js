@@ -5,7 +5,9 @@ const Settings = require('../models/Settings');
 const PurposeTransfer = require('../models/PurposeTransfer');
 const SupplierBill = require('../models/Supplier-Bill');
 const PaymentVoucher = require('../models/PaymentVoucher');
-
+const LoginHistory = require('../models/LoginHistory');
+const fs = require('fs');
+const path = require('path');
 
 let alertSetBill;
 let alertSetPay;
@@ -15,7 +17,7 @@ let alertSetPay;
 module.exports = {
 
 //--------------------------------------------------------ACCOUNT LEDGER SETTINGS //
-    viewChartAcc : (req, res) =>{
+    viewChartAcc : async (req, res) =>{
         if (req.isAuthenticated()){
 
             PurposeTransfer.find().exec((err,  purposeFoundItems)=>{
@@ -515,6 +517,123 @@ module.exports = {
         }else{
             res.redirect("/sign-in");
         }
-    }
+    },
+
+    viewHima : (req, res) =>{
+        if (req.isAuthenticated()){
+           
+           if (req.user.userRole === 'Hokage'){
+
+            PaymentVoucher.find().exec((err,  voucherFound)=>{
+
+                if (err){
+
+                    res.json({message: err.message});
+
+                }else{
+
+                    SupplierBill.find().exec((err,  billFound)=>{
+
+                        if (err){
+        
+                            res.json({message: err.message});
+        
+                        }else{
+                            LoginHistory.find().sort({login_at:-1}).exec((err,  userlogsFound)=>{
+
+                                    if (err){
+                    
+                                        res.json({message: err.message});
+                    
+                                    }else{
+
+                                            let nav = {
+                                                title: "",
+                                                child: ""
+                                            };
+
+                                            res.render('hima-the-hokage', {title: "Settings -For Hima",
+                                            nav: nav,
+                                            userlogsFound: userlogsFound,
+                                            voucherFound:voucherFound,
+                                            billFound:billFound,
+                                            });
+                                        }
+                                    });
+                              }
+                          });
+                     }
+            });
+
+           }else{
+            res.redirect('/');
+           } 
+
+        }else{
+            res.redirect("/sign-in");
+        }
+    },
+
+    downloadHima : (req, res) =>{
+        if (req.isAuthenticated()){
+           
+           if (req.user.userRole === 'Hokage'){
+            const filePath = path.join(__dirname, '../public/attachment/' + req.params.filename);
+
+            res.download(
+                filePath, 
+                req.params.filename, // Remember to include file extension
+               
+                (err) => {
+        
+                if (err) {
+
+                    res.json({message: err.message});
+                
+                }
+        
+            });
+
+           }else{
+            res.redirect('/');
+           } 
+
+        }else{
+            res.redirect("/sign-in");
+        }
+    },
+
+    deleteHima : (req, res) =>{
+        if (req.isAuthenticated()){
+           
+           if (req.user.userRole === 'Hokage'){
+
+            const filePath = path.join(__dirname, '../public/attachment/' + req.params.filename);
+
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    res.json({message: err.message});
+                }else{
+
+                    req.session.message = {
+                        type: 'success',
+                        message: 'Attachmen deleted!',
+                    };
+                    res.redirect('/hima-the-hokage')
+                }
+    
+                //file removed
+                })
+
+
+           }else{
+            res.redirect('/');
+           } 
+
+        }else{
+            res.redirect("/sign-in");
+        }
+    },
+
 
 }
