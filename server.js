@@ -66,6 +66,6 @@ app.get('/', (req, res)=>{
    port = 3000;
  }
 
-app.listen(port, function(){
+app.listen(port, ()=>{
 console.log("Server running on port: " + port);
 });

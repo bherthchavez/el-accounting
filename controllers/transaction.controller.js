@@ -227,7 +227,10 @@ module.exports = {
                         Settings.findOne({name: "bill_settings"}, (err, billSetting)=>{
                         let puvno = parseFloat(billSetting.starting_no) + 1;
                             Settings.findOneAndUpdate({name: "bill_settings"},
-                            {$set: {starting_no:  puvno}}, (err, foundList)=>{
+                            {$set: {starting_no:  puvno}}, (err,)=>{
+                              if (err){
+                                res.json({message: err.message, type: 'danger'});
+                              }
                              });
                         });  
                   }
