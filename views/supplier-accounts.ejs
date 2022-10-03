@@ -20,11 +20,11 @@
                 <div class="btn-list">
                  
                   <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-suppAccount">
-                    <i class="ti ti-plus fs-3 fw-light me-2"> </i>
+                    <i class="ti ti-plus fs-h3 fw-light me-2"> </i>
                     Add Account
                   </a>
                   <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-addAccount" aria-label="Create new bank account">
-                    <i class="ti ti-plus fs-4 fw-light"> </i>
+                    <i class="ti ti-plus fs-h4 fw-light"> </i>
                   </a> 
                 </div>
               </div>
@@ -77,9 +77,9 @@
                               <td>
                                 <div class="col-auto">
                                   <div class="dropdown">
-                                    <button class="btn-outline-light btn-action" data-bs-toggle="dropdown" aria-expanded="false">
-                                      <i class="ti ti-dots-vertical fs-3"></i>      
-                                    </button>
+                                    <a class="btn btn-action" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="ti ti-dots-vertical fs-h3"></i>      
+                                    </a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                       <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modal-suppAccUp<%=account._id%>">Edit / View</a>
                                       <a  class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#modal-deleteAccount<%=account._id%>">Delete</a>
@@ -89,7 +89,7 @@
                               </td>
                               <td>
                                 <div class="text-formated-tbl"> <%=account.supplier_name%> 
-                                  <a href="#" class="ms-1 fs-5" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Bill Created">
+                                  <a href="#" class="ms-1 fs-h5" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Bill Created">
 
                                     <% if( parseFloat(account.created_bills) > 0 ) {%>
                                       <span class="badge bg-blue-lt ms-2"><%= parseFloat(account.created_bills) %></span>
@@ -110,14 +110,14 @@
                               <td >
                                 <div class="btn-list flex-nowrap float-end">
                                   <form>
-                                    <button name="accountID" value="<%=account._id%>" class="btn btn-outline-success btn-sm btn-pill"> Create LPO </button>
+                                    <a name="accountID" value="<%=account._id%>" class="btn btn-pill btn-outline-success btn-sm"> Create LPO </a>
                                   </form>
                               
 
                               
-                                  <a href="/create-bill/<%= account._id %>" id="createBill" class="btn btn-outline-success btn-sm btn-pill"> Create Bill </a>
+                                  <a href="/create-bill/<%= account._id %>" id="createBill" class="btn btn-pill btn-outline-success btn-sm "> Create Bill </a>
                             
-                                  <a href="/pay-bill/<%=account._id%>" id="payBill" class="btn btn-outline-warning btn-sm btn-pill ms-2"> Pay Bill </a> 
+                                  <a href="/pay-bill/<%=account._id%>" id="payBill" class="btn btn-pill btn-outline-warning btn-sm ms-2"> Pay Bill </a> 
                               
                               </div>
                               </td>
@@ -130,7 +130,7 @@
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   <div class="modal-status bg-danger"></div>
                                   <div class="modal-body text-center py-4">
-                                    <i class="ti ti-alert-triangle fs--1 text-danger"></i>
+                                    <i class="ti ti-alert-triangle fs--h1 text-danger"></i>
                                     <h3><%=account.supplier_name%></h3>
                                     <div class="text-muted">Do you really want to delete this account?.</div>
                                   </div>
@@ -286,7 +286,7 @@
                         </table>
                       <% } else { %>
                         <div class="text-center  my-5">
-                          <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                          <div class="fs--h1 text-muted"><i class="ti ti-mood-sad"></i></div>
                           <h1 class="text-secondary">Ohh!</h1>
                           <p class="text-secondary"> No supplier account found in the database!</p>
                         </div>
@@ -321,7 +321,6 @@
               $("#payBill").prepend('<span class="spinner-border spinner-border-sm me-2" role="status"></span> ');
           
             })
-            
           });
           </script>
 

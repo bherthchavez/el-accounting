@@ -142,6 +142,9 @@ module.exports = {
         if (req.isAuthenticated()){
 
             SupplierAccount.findOne({_id:req.body.supplierID}, (err, foundSupplier)=>{
+              if(err){
+                res.json({message: err.message, type: 'danger'});
+              }else{
                 const totalPayment = + (req.body.totalPayment).split(',').join('');
                 const bill = new SupplierBill({
                   supplier_id:  req.body.supplierID,
@@ -237,11 +240,14 @@ module.exports = {
                 });
 
                 req.session.message = {
-                    type: 'success',
-                    message: 'Supplier bill successfully created!',
+                    type: 'transac',
+                    tType: 'bill',
+                    message: 'Bill for '+ foundSupplier.supplier_name + ' has been successfully created. Bill No: ' + req.body.puvNo +' Amount: QAR '+req.body.totalPayment,
+                    transID: req.body.supplierID,
                 };
 
                 res.redirect("/supplier-accounts")
+              }
             });
         }else{
             res.redirect("/sign-in");
@@ -390,7 +396,9 @@ module.exports = {
                       
                                 });
                                 PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundVoucher){
-                                  if(!err){
+                                  if(err){
+                                    res.json({message: err.message, type: 'danger'});
+                                  }else{
                                     foundVoucher.bank_transfer.push(transfer);
                                     foundVoucher.save();
                                   }
@@ -412,7 +420,9 @@ module.exports = {
                                     cheque_amount:  + (req.body.chequeAmount).split(',').join('')
                                   });
                                   PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundCheque){
-                                    if(!err){
+                                    if(err){
+                                      res.json({message: err.message, type: 'danger'});
+                                    }else{
                                       foundCheque.cheque.push(cheque);
                                       foundCheque.save();
                                     }
@@ -541,12 +551,24 @@ module.exports = {
                               });
                           }); 
 
-                        req.session.message = {
-                        type: 'success',
-                        message: 'Payment Voucher successfully created!',
-                        };
+                          PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundPav){
+                            if(err){
+                              res.json({message: err.message, type: 'danger'});
+                            }else{
+
+                                req.session.message = {
+                                  type: 'transac',
+                                  tType: 'pay',
+                                  message: 'Payment Voucher has been successfully created. Voucher No: ' + req.body.pavNo +' Amount: QAR '+req.body.totalPayment,
+                                  transID: foundPav._id,
+                                 };
+
+                                 res.redirect("/supplier-accounts");
+                                }
+                              
+                              });
           
-                          res.redirect("/supplier-accounts");
+                         
                         }
                     });
                     

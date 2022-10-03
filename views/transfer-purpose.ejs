@@ -18,11 +18,11 @@
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                   <div class="btn-list">
                       <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-addTransPurpose">
-                        <i class="ti ti-plus fs-3 fw-light me-1"> </i>
+                        <i class="ti ti-plus fs-h3 fw-light me-1"> </i>
                         CREATE
                       </a>
                       <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-addAccount" aria-label="Create new bank account">
-                        <i class="ti ti-plus fs-4 fw-light"> </i>
+                        <i class="ti ti-plus fs-h4 fw-light"> </i>
                       </a>
                   </div>
                 </div>
@@ -93,13 +93,13 @@
                               <td class="text-end">
 
                                 <span data-bs-toggle="modal" data-bs-target="#modal-addTransPurpose<%=account._id%>">
-                                  <button class="btn btn-white fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Edit"> 
+                                  <button class="btn fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Edit"> 
                                     <i class="ti ti-pencil"></i>
                                   </button>
                                 </span>
                               
                                <span data-bs-toggle="modal" data-bs-target="#modal-deleteAccount<%=account._id%>">
-                                  <button class="btn btn-white btn-icon fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
+                                  <button class="btn btn-icon fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
                                     <i class="ti ti-trash"></i>
                                    </button>
                                </span>
@@ -113,7 +113,7 @@
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   <div class="modal-status bg-danger"></div>
                                   <div class="modal-body text-center py-4">
-                                    <i class="ti ti-alert-triangle fs--1 text-danger"></i>
+                                    <i class="ti ti-alert-triangle fs--h1 text-danger"></i>
                                     <h3><%=account.purpose%></h3>
                                     <div class="text-muted">Do you really want to delete this purpose?</div>
                                   </div>
@@ -163,7 +163,7 @@
                                     <div class="modal-footer">
                                       <a href="#"  class="btn btn-link link-secondary" data-bs-dismiss="modal">  Cancel </a>
                                       <button type="submit" class="btn btn-primary ms-auto" name="accountID" value="<%=account._id%>" >
-                                        <i class="ti ti-device-floppy fs-3 fw-light me-2"></i>
+                                        <i class="ti ti-device-floppy fs-h3 fw-light me-2"></i>
                                         Save
                                       </button>
                                     </div>

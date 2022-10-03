@@ -14,14 +14,14 @@
             <div class="col-12 col-md-auto ms-auto d-print-none">
                 <div class="dropdown btn-list">
                     <button type="button" class="btn dropdown-toggle text-muted " data-bs-toggle="dropdown">
-                    <i class="ti ti-file-plus  fs-3 me-2"></i> New Transaction
+                    <i class="ti ti-file-plus  fs-h3 me-2"></i> New Transaction
                     </button>
                     <div class="dropdown-menu">
-                    <a class="dropdown-item text-muted mt-1" data-bs-toggle="offcanvas" href="#offcanvasStart" role="button" aria-controls="offcanvasStart"> <i class="ti ti-file-invoice fs-3 me-2"></i>
+                    <a class="dropdown-item text-muted mt-1" data-bs-toggle="offcanvas" href="#offcanvasStart" role="button" aria-controls="offcanvasStart"> <i class="ti ti-file-invoice fs-h3 me-2"></i>
                         Create Bill 
                     </a>
                     <a class="dropdown-item text-muted mt-1" data-bs-toggle="offcanvas" href="#offcanvasStart2" role="button" aria-controls="offcanvasStart"> 
-                        <i class="ti ti-building-bank fs-3 me-2"></i>
+                        <i class="ti ti-building-bank fs-h3 me-2"></i>
                         Pay Supplier 
                     </a>
                     </div>
@@ -57,21 +57,21 @@
                       <%})%>
                 
                   <div class="mt-4 text-end">
-                      <a href="" class="btn btn-primary w-50 fs-3 createBill" > Create bill <i class="ti ti-chevron-right fs-3 ms-2"></i></a>
+                      <a href="" class="btn btn-primary w-50 fs-h3 createBill" > Create bill <i class="ti ti-chevron-right fs-h3 ms-2"></i></a>
                     </form>
                     
                <% } else { %>   
 
                     <div class="empty">
                       <div class="text-center  my-5">
-                        <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                        <div class="fs--h1 text-muted"><i class="ti ti-mood-sad"></i></div>
                         <h1 class="text-secondary">Ohh!</h1>
                         <p class="text-secondary"> No supplier found in the database!</p>
                       </div>
                       <div class="empty-action">
         
                         <a  href="/supplier-accounts" class="btn btn-primary">
-                          <i class="ti ti-plus fs-4 fw-light me-2"></i>
+                          <i class="ti ti-plus fs-h4 fw-light me-2"></i>
                          Create supplier account
                         </a>
                       </div>
@@ -94,7 +94,7 @@
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col">
-                  <div class="fw-bold fs-1">
+                  <div class="fw-bold fs-h2">
                     <%=  voucherItems.length %>
                   </div>
                   <div class="text-muted">
@@ -102,7 +102,7 @@
                   </div>
                 </div>
                 <div class="col-auto">
-                  <span class="bg-orange-lt avatar fs-2 ">
+                  <span class="bg-orange-lt avatar fs-h2 ">
                     <i class="ti ti-list-numbers"></i>
                    </span>
                 </div>
@@ -119,8 +119,8 @@
               <div class="row align-items-center">
             
                 <div class="col">
-                  <div class="fw-bold fs-1">
-                    <span class="text-muted fs-5 fw-normal">QAR</span>
+                  <div class="fw-bold fs-h2">
+                    <span class="text-muted fs-h5 fw-normal">QAR</span>
                     <% if (voucherItems != '') { %>
 
                         <%  var sumOfCC = 0 %>
@@ -140,7 +140,7 @@
                   </div>
                 </div>
                 <div class="col-auto">
-                  <span class="bg-green-lt avatar fs-2 ">
+                  <span class="bg-green-lt avatar fs-h2 ">
                     <i class="ti ti-cash-banknote"></i>
                    </span>
                 </div>
@@ -157,8 +157,8 @@
             
                 <div class="col">
                  
-                  <div class="fw-bold fs-1">
-                    <span class="text-muted fs-5 fw-normal">QAR</span>
+                  <div class="fw-bold fs-h2">
+                    <span class="text-muted fs-h5 fw-light">QAR</span>
                     <% if (voucherItems != '') { %>
 
                         <%  var sumOfBT = 0 %>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
                 <div class="col-auto">
-                  <span class="bg-green-lt avatar fs-2 ">
+                  <span class="bg-green-lt avatar fs-h2 ">
                     <i class="ti ti-cash-banknote"></i>
                    </span>
                 </div>
@@ -193,8 +193,8 @@
             <div class="card-body">
               <div class="row align-items-center">
                 <div class="col">
-                  <div class="fw-bold fs-1">
-                    <span class="text-muted fs-5 fw-normal">QAR</span>
+                  <div class="fw-bold fs-h2">
+                    <span class="text-muted fs-h5 fw-normal">QAR</span>
                     <% if (voucherItems != '') { %>
                       
                         <%  var sumOfTotal = 0 %>
@@ -212,7 +212,7 @@
                   </div>
                 </div>
                 <div class="col-auto">
-                  <span class="bg-green-lt avatar fs-2 ">
+                  <span class="bg-green-lt avatar fs-h2 ">
                     <i class="ti ti-cash"></i>
                    </span>
                 </div>
@@ -255,9 +255,9 @@
                   <% if(cc.subTotal>0){%>
                 <tr>
                   <td><%=cc.cost_center%></td>
-                  <td class="text-end text-muted fs-5 text-nowrap">
+                  <td class="text-end text-muted fs-h5 text-nowrap">
                     QAR
-                     <div class="text-warning d-md-inline-flex fs-3 ms-1"><%=(cc.subTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %></div>
+                     <div class="text-warning d-md-inline-flex fs-h3 ms-1"><%=(cc.subTotal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') %></div>
                    </td>
                 </tr>
                 <%}%>
@@ -266,9 +266,8 @@
             </table>
             <% } else { %>
               <div class="text-center  my-5">
-                <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                <div class="fs--h1 text-muted"><i class="ti ti-mood-sad"></i></div>
                 <h3 class="text-secondary"> No bill created!</h3>
-                <!-- <small class="text-secondary"> No bill created!</small> -->
               </div>
              <% } %> 
           </div>
@@ -330,12 +329,10 @@
                       </td>
                       <td>
                         <% if(item.payment_mode ==="Bank Transfer"){%>
-                          <!-- <form action="/print-letter/" method="post"> -->
                             <%=item.payment_mode%>
-                            <a href="/print-letter/<%= item._id%>"  class="btn btn-ghost-dark w-1 btn--small" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Print Bank Letter">
+                            <a href="/print-letter/<%= item._id%>"  class="btn btn-action w-1 btn--small"  role="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Print Bank Letter">
                               <i class="ti ti-clipboard-text"></i>
                             </a>
-                            <!-- </form> -->
                         <%}else{ %>
                           <%=item.payment_mode%>
                           <% } %>
@@ -344,15 +341,15 @@
                         <%=item.description%>
                       </td>
 
-                      <td class="text-nowrap text-muted fs-5">
+                      <td class="text-nowrap text-muted fs-h5">
                        QAR
-                        <div class="text-warning d-md-inline-flex fs-3 ms-1"> <%= (item.total_payment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
+                        <div class="text-warning d-md-inline-flex fs-h3 ms-1"> <%= (item.total_payment).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')%></div>
                       </td>
                       <td>
                         <%=item.created_by%>
                       </td>
                       <td>
-                        <span class="status status-red fs-5">
+                        <span class="status status-red fs-h5">
                           <%= (item.status)%>
                         </span>
                       </td>
@@ -362,7 +359,7 @@
                 </table>
                 <% } else { %>
                   <div class="text-center  my-5">
-                    <div class="fs--1 text-muted"><i class="ti ti-mood-sad"></i></div>
+                    <div class="fs--h1 text-muted"><i class="ti ti-mood-sad"></i></div>
                     <h1 class="text-secondary">Ohh!</h1>
                     <p class="text-secondary"> No payment transaction found in the database!</p>
                   </div>
@@ -399,7 +396,7 @@
               <div class="empty-action">
 
                 <a  class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasStart" role="button" aria-controls="offcanvasStart">
-                  <i class="ti ti-plus fs-4 fw-light me-2"></i>
+                  <i class="ti ti-plus fs-h4 fw-light me-2"></i>
                  Create purchase bill
                 </a>
 
@@ -417,7 +414,7 @@
                   </div>
                   <div>
                     <%=pay.supplier_name%>
-                    <a href="#" class="ms-1 fs-5" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Bill Created">
+                    <a href="#" class="ms-1 fs-h5" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="Bill Created">
 
                     <span class="badge bg-orange ms-2"><%= parseFloat(pay.created_bills) %></span>
                     </a>
@@ -426,7 +423,7 @@
               </label>
               <%})%>
               <div class="mt-4 text-end">
-                  <a href="" class="btn btn-primary w-50 fs-3 payBill" > Pay Supplier <i class="ti ti-chevron-right fs-3 ms-2"></i></a>
+                  <a href="" class="btn btn-primary w-50 fs-h3 payBill" > Pay Supplier <i class="ti ti-chevron-right fs-h3 ms-2"></i></a>
                 </form>
               </div>
           <%}%>

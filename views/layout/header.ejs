@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta12
+* @link https://tabler.io
+* Copyright 2018-2022 The Tabler Authors
+* Copyright 2018-2022 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
@@ -11,12 +19,20 @@
     <link href="../dist/css/tabler-payments.min.css" rel="stylesheet"/>
     <link href="../dist/css/tabler-vendors.min.css" rel="stylesheet"/>
     <link href="../dist/css/demo.min.css" rel="stylesheet"/>
+    <link href="../dist/css/custom.css" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+     <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+    </style>
     </head>
 
   <body >
+    <script src="../dist/js/demo-theme.min.js"></script>
     <div class="page">
       <div class="sticky-top">
         <header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
@@ -33,14 +49,17 @@
              
               
                 <div class="nav-item dropdown d-none d-md-flex me-3">
-                  <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Enable dark mode">
-                    <i class="ti ti-moon fs-2"></i> 
-                  </a>
-                  <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Enable light mode">
-                    <i class="ti ti-sun-high fs-2"></i>
-                  </a>
-                 
+
+                  <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
+                  data-bs-placement="bottom">
+                  <i class="ti ti-moon fs-h2"></i> 
+                           </a>
+                           <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip"
+                  data-bs-placement="bottom">
+                           <i class="ti ti-sun-high fs-h2"></i>
+                           </a>
                 </div>
+
               <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                   <span class="avatar avatar-sm" style="background-image: url(../static/avatars/user-avatar.png)"></span>
@@ -58,15 +77,15 @@
           </div>
         </header>
 
-        <% if (message) { %>
+        <% if (message && message.type != 'transac') { %>
           <div class="alert-notif2">
             <div class="alert alert-important alert-<%= message.type %> alert-dismissible alertNotif2" role="alert">
               <div class="d-flex">
                 <div class="fw-light">
                   <% if (message.type === 'danger'){ %>
-                  <i class="ti ti-alert-triangle fs-2 me-2"></i>
+                  <i class="ti ti-alert-triangle fs-h2 me-2"></i>
                   <% }else{ %>
-                  <i class="ti ti-check fs-2 me-2"></i>  
+                  <i class="ti ti-check fs-h2 me-2"></i>  
                   <% } %>
                   <%= message.message %>
                 </div>
@@ -84,7 +103,7 @@
                 <li class="nav-item <%- (nav.title) == 'Dashboard' ? 'active' : ''  %> ">
                   <a class="nav-link" href="/" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                      <i class="ti ti-home-stats fs-2"></i>
+                      <i class="ti ti-home-stats fs-h2"></i>
                     </span>
                     <span class="nav-link-title"> Dashboard </span>
                   </a>
@@ -92,7 +111,7 @@
                 <li class="nav-item dropdown <%- (nav.title) == 'Accounts' ? 'active' : ''  %> ">
                   <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                      <i class="ti ti-presentation-analytics fs-2"></i>
+                      <i class="ti ti-presentation-analytics fs-h2"></i>
                   </span>
                     <span class="nav-link-title">
                       Accounts
@@ -106,7 +125,7 @@
                 <li class="nav-item dropdown <%- (nav.title) == 'Settings' ? 'active' : ''  %>">
                   <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
-                      <i class="ti ti-adjustments-horizontal fs-2"></i>
+                      <i class="ti ti-adjustments-horizontal fs-h2"></i>
                   </span>
                     <span class="nav-link-title">Settings</span>
                   </a>
@@ -122,12 +141,65 @@
       </div>
     </div>
 
- 
+  
+    
+
+      <% if (message && message.type === 'transac') { %>
+      <div class="modal modal-blur fade" id="modal-success-trans" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-status bg-success"></div>
+            <div class="modal-body text-center py-4">
+              <i class="ti ti-circle-check text-green fs--h1"></i>
+              <% if (message.tType === 'bill'){ %>
+                <h3 mt-2>Bill created</h3>
+                <% }else{ %>
+                <h3 mt-2>Payment voucher created</h3>
+              <% } %>
+              <div class="text-muted"><%= message.message %></div>
+            </div>
+            <div class="modal-footer">
+              <div class="w-100">
+                <div class="row">
+                  <div class="col">
+                    <a href="/" class="btn w-100">
+                      Go to dashboard
+                    </a>
+                  </div>
+
+                    <% if (message.tType === 'bill'){ %>
+                      <div class="col">
+                        <a href="/pay-bill/<%= message.transID %>" class="btn btn-success w-100">
+                         Pay bill
+                       </a>
+                      </div>
+                       <% }else{ %>
+
+                         <div class="col">
+                          <a href="/print-voucher/<%= message.transID %>" class="btn btn-success w-100">
+                          View voucher
+                        </a>
+                      </div>
+                         <% } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+
 
       <script>
         $(document).ready(function() {
           setTimeout(function() {
           $(".alertNotif2").alert('close');
           }, 5000);
+          '<% if (message && message.type ==="transac") { %>'
+          $("#modal-success-trans").modal('toggle');
+         ' <% } %>'
         });
+        
       </script>

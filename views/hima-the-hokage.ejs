@@ -27,11 +27,11 @@
               <div class="col-md-auto ms-auto d-print-none">
                 <div class="btn-list">
                   <a href="#" class="btn">
-                    <i class="ti ti-settings fs-2 pe-2"></i>
+                    <i class="ti ti-settings fs-h2 pe-2"></i>
                     Configure
                   </a>
                   <a href="/hima-the-hokage" class="btn btn-primary">
-                    <i class="ti ti-eye fs-2 pe-2"></i>
+                    <i class="ti ti-eye fs-h2 pe-2"></i>
                     Reactivate byakugan
                   </a>
                 </div>
@@ -48,38 +48,24 @@
                   <div class="card-body">
                     <div class="subheader">Currently user login:  <%= userlogsFound[0].user_name %> </div>
                     <div class="h3 m-0">
-
-                  
                       <%  function timeDiffCalc(dateFuture, dateNow) {%>
                       <%  let diffInMilliSeconds = Math.abs(dateFuture - dateNow) / 1000;%>
-
                       <%  const days = Math.floor(diffInMilliSeconds / 86400);%>
                       <%  diffInMilliSeconds -= days * 86400;%>
-                     
-                      
                       <%  const hours = Math.floor(diffInMilliSeconds / 3600) % 24;%>
                       <%  diffInMilliSeconds -= hours * 3600;%>
-                      
-                      
                       <%  const minutes = Math.floor(diffInMilliSeconds / 60) % 60;%>
                       <%  diffInMilliSeconds -= minutes * 60;%>
-                      
                       <%  let difference = '';%>
                       <%  if (days > 0) {%>
                       <%  difference += (days === 1) ? `${days} day, ` : `${days} days, `;%>
                       <% } %>
-                      
                       <% difference += (hours === 0 || hours === 1) ? `${hours} hour, ` : `${hours} hours, `;%>
-                      
                       <% difference += (minutes === 0 || hours === 1) ? `${minutes} minutes` : `${minutes} minutes`; %>
-                      
                       <% return difference; %>
                       <% } %>
-             
-                    
-                        <% let currentUserLog = (timeDiffCalc(new Date(userlogsFound[0].login_at), new Date())) %>
+                      <% let currentUserLog = (timeDiffCalc(new Date(userlogsFound[0].login_at), new Date())) %>
                      
-                       
                         <%= currentUserLog %>
                     </div>
                   </div>
@@ -103,7 +89,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Voucher Attachment</h4>
@@ -121,16 +107,16 @@
                         <% voucherFound.forEach(function(voucher){ %>
                             <tr>
                               <td> <%=voucher.documents%></td>
-                              <td class="fs-5"> <%=(new Date(voucher.created_at).toLocaleTimeString('en-US'))%><br> <%=(new Date(voucher.created_at).toLocaleDateString("en-US", {year: 'numeric', day: 'numeric', month: 'short' }))%> 
+                              <td class="fs-h5 text-muted fs-h5 text-nowrap"> <%=(new Date(voucher.created_at).toLocaleTimeString('en-US'))%><br> <%=(new Date(voucher.created_at).toLocaleDateString("en-US", {year: 'numeric', day: 'numeric', month: 'short' }))%> 
                               </td>
 
                               <td class="text-end text-nowrap">
-                                  <a href="/download-attachment/<%=voucher.documents%>" class="btn btn-white fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Download"> 
+                                  <a href="/download-attachment/<%=voucher.documents%>" class="btn btn-icon fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Download"> 
                                     <i class="ti ti-download"></i>
                                   </a>
 
                                   <span data-bs-toggle="modal" data-bs-target="#modal-deleteAttach<%=voucher._id%>">
-                                  <button  class="btn btn-white btn-icon fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
+                                  <button  class="btn btn-icon fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
                                     <i class="ti ti-trash"></i>
                                    </button>
                                   </span>
@@ -143,7 +129,7 @@
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   <div class="modal-status bg-danger"></div>
                                   <div class="modal-body text-center py-4">
-                                    <i class="ti ti-alert-triangle fs--1 text-danger"></i>
+                                    <i class="ti ti-alert-triangle fs--h1 text-danger"></i>
                                     <h3><%=voucher.documents%></h3>
                                     <div class="text-muted">Do you really want to delete this attachment?</div>
                                   </div>
@@ -172,13 +158,13 @@
                 </div>
               </div>
 
-              <div class="col-6">
+              <div class="col-lg-6">
                 <div class="card">
                   <div class="card-header">
                     <h4>Bill Attachment</h4>
                   </div>
-                  <div class="card-table table-responsive">
-                    <table class="table card-table table-vcenter" style="max-height: 18rem">
+                  <div class="card-table table-responsive" style="max-height: 18rem">
+                    <table class="table card-table table-vcenter">
                       <thead>
                         <tr>
                           <th>File Name</th>
@@ -189,16 +175,16 @@
                       <tbody>
                         <% billFound.forEach(function(bill){ %>
                           <tr>
-                            <td > <%=bill.documents%></td>
-                            <td class="fs-5"> <%=(new Date(bill.created_at).toLocaleTimeString('en-US'))%><br> <%=(new Date(bill.created_at).toLocaleDateString("en-US", {year: 'numeric', day: 'numeric', month: 'short' }))%> 
+                            <td><%=bill.documents%></td>
+                            <td class="fs-h5 text-muted fs-h5 text-nowrap"> <%=(new Date(bill.created_at).toLocaleTimeString('en-US'))%><br> <%=(new Date(bill.created_at).toLocaleDateString("en-US", {year: 'numeric', day: 'numeric', month: 'short' }))%> 
                             </td>
 
                             <td class="text-end text-nowrap">
-                                <a href="/download-attachment/<%=bill.documents%>"  class="btn btn-white fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Download"> 
+                                <a href="/download-attachment/<%=bill.documents%>"  class="btn btn-icon fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Download"> 
                                   <i class="ti ti-download"></i>
                                 </a>
                                 <span data-bs-toggle="modal" data-bs-target="#modal-deleteAttach1<%=bill._id%>">
-                                <button  class="btn btn-white btn-icon fs-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
+                                <button  class="btn btn-icon fs-h3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Delete" > 
                                   <i class="ti ti-trash"></i>
                                  </button>
                                 </span>
@@ -211,7 +197,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 <div class="modal-status bg-danger"></div>
                                 <div class="modal-body text-center py-4">
-                                  <i class="ti ti-alert-triangle fs--1 text-danger"></i>
+                                  <i class="ti ti-alert-triangle fs--h1 text-danger"></i>
                                   <h3><%=bill.documents%></h3>
                                   <div class="text-muted">Do you really want to delete this attachment?</div>
                                 </div>
