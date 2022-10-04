@@ -67,7 +67,7 @@ module.exports = {
         }
     },
 
-    addChartAcc: (req, res)=>{
+    addChartAcc: async (req, res)=>{
         if (req.isAuthenticated()){
 
             const cc = new ChartOfAccounts({
@@ -94,7 +94,7 @@ module.exports = {
 
     },
 
-    updateChartAcc: (req, res)=>{
+    updateChartAcc: async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id;
@@ -121,7 +121,7 @@ module.exports = {
         } 
     },
 
-    deleteChartAcc : (req, res)=>{
+    deleteChartAcc : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id
@@ -145,7 +145,7 @@ module.exports = {
         } 
     },
 //-------------------------------------------------------- COST CENTER SETTINGS //
-    viewCostCenter : (req, res) =>{
+    viewCostCenter : async (req, res) =>{
         if (req.isAuthenticated()){
 
             PurposeTransfer.find().exec((err,  purposeFoundItems)=>{
@@ -195,7 +195,7 @@ module.exports = {
         }
     },
 
-    addCostCenter: (req, res)=>{
+    addCostCenter: async (req, res)=>{
         if (req.isAuthenticated()){
 
             const cc = new CostCenter({
@@ -222,7 +222,7 @@ module.exports = {
 
     },
 
-    updateCostCenter: (req, res)=>{
+    updateCostCenter: async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id;
@@ -249,7 +249,7 @@ module.exports = {
         } 
     },
 
-    deleteCostCenter : (req, res)=>{
+    deleteCostCenter : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id
@@ -273,7 +273,7 @@ module.exports = {
         } 
     },
 //-------------------------------------------------------- Purpose Transfer SETTINGS //
-    viewPurpose : (req, res) =>{
+    viewPurpose : async (req, res) =>{
         if (req.isAuthenticated()){
 
             PurposeTransfer.find().exec((err,  purposeFoundItems)=>{
@@ -323,7 +323,7 @@ module.exports = {
         }
     },
 
-    addPurpose: (req, res)=>{
+    addPurpose: async (req, res)=>{
         if (req.isAuthenticated()){
 
             const purpose = new PurposeTransfer({
@@ -350,7 +350,7 @@ module.exports = {
 
     },
 
-    updatePurpose: (req, res)=>{
+    updatePurpose: async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id;
@@ -377,7 +377,7 @@ module.exports = {
         } 
     },
 
-    deletePurpose : (req, res)=>{
+    deletePurpose : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id
@@ -401,7 +401,7 @@ module.exports = {
         } 
     },
  //--------------------------------------------------------  SYSTEM SETTINGS //
-    viewSysSettings : (req, res) =>{
+    viewSysSettings : async (req, res) =>{
         if (req.isAuthenticated()){
           
                     Settings.findOne({name: "bill_settings"}, (err, billSetting)=>{
@@ -438,7 +438,7 @@ module.exports = {
         }
     },
 
-    updateSysSettings : (req, res) =>{
+    updateSysSettings : async (req, res) =>{
         if (req.isAuthenticated()){
             
             let billNo = req.body.billPrefix + req.body.billStartingNo;
@@ -519,7 +519,7 @@ module.exports = {
         }
     },
 
-    viewHima : (req, res) =>{
+    viewHima : async (req, res) =>{
         if (req.isAuthenticated()){
            
            if (req.user.userRole === 'Hokage'){
@@ -574,7 +574,7 @@ module.exports = {
         }
     },
 
-    downloadHima : (req, res) =>{
+    downloadHima : async (req, res) =>{
         if (req.isAuthenticated()){
            
            if (req.user.userRole === 'Hokage'){
@@ -603,7 +603,7 @@ module.exports = {
         }
     },
 
-    deleteHima : (req, res) =>{
+    deleteHima : async (req, res) =>{
         if (req.isAuthenticated()){
            
            if (req.user.userRole === 'Hokage'){

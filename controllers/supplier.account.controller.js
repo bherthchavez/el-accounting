@@ -3,7 +3,7 @@ const SupplierAccount = require('../models/SupplierAccount');
 
 module.exports = {
 
-    addSuppAcc : (req, res) =>{
+    addSuppAcc : async (req, res) =>{
         if (req.isAuthenticated()){
 
                 const openingBalance = + (req.body.openingBalance).split(',').join('');;
@@ -45,7 +45,7 @@ module.exports = {
         }
     },
 
-    viewSuppAcc: (req, res)=>{
+    viewSuppAcc: async (req, res)=>{
         if (req.isAuthenticated()){
 
             SupplierAccount.find().exec((err, accounts)=>{
@@ -72,7 +72,7 @@ module.exports = {
 
     },
 
-    updateSuppAcc: (req, res)=>{
+    updateSuppAcc: async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id;
@@ -111,7 +111,7 @@ module.exports = {
         } 
     },
 
-    deleteSuppAcc : (req, res)=>{
+    deleteSuppAcc : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id

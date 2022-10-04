@@ -2,7 +2,7 @@ const BankAccount = require('../models/BankAccount');
 
 module.exports = {
 
-    addBankAcc : (req, res) =>{
+    addBankAcc : async (req, res) =>{
         if (req.isAuthenticated()){
 
                 const balanceAmount = + (req.body.openingBalance).split(',').join('');
@@ -36,7 +36,7 @@ module.exports = {
         }
     },
 
-    viewBankAcc: (req, res)=>{
+    viewBankAcc: async (req, res)=>{
         if (req.isAuthenticated()){
 
                 BankAccount.find().exec((err, accounts)=>{
@@ -62,7 +62,7 @@ module.exports = {
 
     },
 
-    updateBankAcc: (req, res)=>{
+    updateBankAcc: async (req, res)=>{
 
          let id = req.params.id;
          
@@ -88,7 +88,7 @@ module.exports = {
          });
     },
 
-    deleteBankAcc : (req, res)=>{
+    deleteBankAcc : async (req, res)=>{
         let id = req.params.id
 
         BankAccount.findById(id, (err, result)=>{

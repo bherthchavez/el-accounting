@@ -12,7 +12,7 @@ const AmountToWords = require('../middleware/amount-words.middleware');
 
 module.exports = {
 
-    printLetter : (req, res)=>{
+    printLetter : async (req, res)=>{
     
         if (req.isAuthenticated()){
 
@@ -40,7 +40,7 @@ module.exports = {
         } 
     },
 
-    printVoucher : (req, res)=>{
+    printVoucher : async (req, res)=>{
       if (req.isAuthenticated()){
 
         let id = req.params.id;
@@ -78,7 +78,7 @@ module.exports = {
         } 
     },
 
-    cBillSuppAcc : (req, res)=>{
+    cBillSuppAcc : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id
@@ -138,7 +138,7 @@ module.exports = {
         } 
     },
 
-    supplierBill : (req, res)=>{
+    supplierBill : async (req, res)=>{
         if (req.isAuthenticated()){
 
             SupplierAccount.findOne({_id:req.body.supplierID}, (err, foundSupplier)=>{
@@ -254,7 +254,7 @@ module.exports = {
         } 
     },
 
-    paySuppBill : (req, res)=>{
+    paySuppBill : async (req, res)=>{
         if (req.isAuthenticated()){
 
             let id = req.params.id
@@ -318,7 +318,7 @@ module.exports = {
         } 
     },
 
-    paySupplier : (req, res)=>{
+    paySupplier : async (req, res)=>{
         if (req.isAuthenticated()){
           
             

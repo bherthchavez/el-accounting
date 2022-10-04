@@ -5,7 +5,7 @@ const ip = require('ip');
 
 module.exports = {
    
-     signIn: (req, res)=>{   
+     signIn: async (req, res)=>{   
 
         res.render('sign-in', {
             title: "Sign In User",
@@ -15,7 +15,7 @@ module.exports = {
         
     },
 
-    checkUser: (req, res)=>{   
+    checkUser: async (req, res)=>{   
 
         const user = new User({
             username: req.body.username,
@@ -61,15 +61,15 @@ module.exports = {
           }
         });
             
-        },
+    },
 
-        logoutUser: (req, res)=>{   
+    logoutUser: async (req, res)=>{   
 
-            req.logout((err) =>{
-                if (err) { return next(err); }
-                res.redirect('/');
-              });
-                
-        },
-        
+        req.logout((err) =>{
+            if (err) { return next(err); }
+            res.redirect('/');
+          });
+            
+    },
+    
 }
