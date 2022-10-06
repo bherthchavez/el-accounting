@@ -338,7 +338,10 @@
                           <% } %>
                       </td>
                       <td class="text-capitalize">
-                        <%=item.description%>
+                        <%=item.description.substring(0, 20)%>
+                        <a class="cursor-pointer"  role="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="<%=item.description%>">
+                        ...
+                        </a>
                       </td>
 
                       <td class="text-nowrap text-muted fs-h5">

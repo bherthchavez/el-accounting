@@ -182,7 +182,11 @@
 
                                                   </td>
                                                   <td>
-                                                    <%=bill.description%>
+                                                 
+                                                    <%=bill.description.substring(0, 20)%>
+                                                    <a class="cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" data-bs-title="<%=bill.description%>">
+                                                    ...
+                                                    </a>
                                                   </td>
                                                   <td>
                                                     <%=bill.created_by%>

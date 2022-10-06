@@ -186,7 +186,7 @@ module.exports = {
                           });
                      }else{
                       for (var i = 0; i < totalItem; i++){
-                        let newitem = new BillItem({
+                        let newitem =  new BillItem ({
                           bill_number:  req.body.puvNo,
                           items:  req.body.item[i],
                           items_description: req.body.itemDesc[i],
@@ -345,14 +345,14 @@ module.exports = {
                     const totalAmountInWords = AmountToWords.toWords(x);
                    
                     const pay = new PaymentVoucher({
-                      payment_voucher_no:  req.body.pavNo,
+                      payment_voucher_no: req.body.pavNo,
                       supplier_id: req.body.supplierID,
                       supplier_name: req.body.supplierName,
                       payment_from: Bank_Name,
-                      bank_id:  req.body.paymentFrom,
-                      payment_mode:  req.body.paymentMode,
+                      bank_id: req.body.paymentFrom,
+                      payment_mode: req.body.paymentMode,
                       date: req.body.billDate,
-                      description:  req.body.description,
+                      description: req.body.description,
                       documents: req.file.filename,
                       total_payment: payment_amount,
                       amountInWords: totalAmountInWords,
@@ -360,7 +360,6 @@ module.exports = {
                       status: "Pending",
                       created_by: req.user.name,
                       updated_at: Date.now()
-          
                     });
                     pay.save((err) =>{
           
@@ -395,7 +394,7 @@ module.exports = {
                                   transfer_amount: + (req.body.bankTransferAmount).split(',').join('')
                       
                                 });
-                                PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundVoucher){
+                                PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo},(err, foundVoucher)=>{
                                   if(err){
                                     res.json({message: err.message, type: 'danger'});
                                   }else{
@@ -419,7 +418,7 @@ module.exports = {
                                     cheque_status: req.body.chequeStatus,
                                     cheque_amount:  + (req.body.chequeAmount).split(',').join('')
                                   });
-                                  PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundCheque){
+                                  PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, (err, foundCheque)=>{
                                     if(err){
                                       res.json({message: err.message, type: 'danger'});
                                     }else{
@@ -439,7 +438,7 @@ module.exports = {
                                         cheque_status: req.body.chequeStatus[i],
                                         cheque_amount:  + (req.body.chequeAmount[i]).split(',').join('')
                                       });
-                                      PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo}, function(err, foundCheque){
+                                      PaymentVoucher.findOne({payment_voucher_no: req.body.pavNo},(err, foundCheque)=>{
                                         if(!err){
                                           foundCheque.cheque.push(chequeMany);
                                           foundCheque.save();
