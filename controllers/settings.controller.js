@@ -635,5 +635,15 @@ module.exports = {
         }
     },
 
+    err404: async (req, res)=>{   
+        if (req.isAuthenticated()){
+          res.render('error-404')
+  
+        }else{
+          res.redirect("/sign-in");
+      } 
+            
+    },
+
 
 }
