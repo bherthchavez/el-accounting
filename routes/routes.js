@@ -54,5 +54,5 @@ router.get('/print-letter/:id', transactionController.printLetter);
 router.get('/print-voucher/:id', transactionController.printVoucher);
 
 
-router.get('*', settings.err404);
+router.all('*', settings.err404);
 module.exports = router;

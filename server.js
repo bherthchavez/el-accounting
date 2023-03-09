@@ -2,9 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-const _ = require("lodash");
-const http = require("http");
-const { get, parseInt, replace } = require("lodash");
 
 const sesion = require('express-session');
 const passport =require("passport");
@@ -46,9 +43,9 @@ app.use((req, res, next)=>{
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// mongoose.connect("mongodb://localhost:27017/accountingDB", {useNewUrlParser: true});
+mongoose.connect("mongodb://127.0.0.1:27017/accountingDB", {useNewUrlParser: true});
 
-mongoose.connect("mongodb+srv://admin-bherth:Test123@cluster0.hjeikps.mongodb.net/accountingDB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect("mongodb+srv://admin-bherth:Test123@cluster0.hjeikps.mongodb.net/accountingDB?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true});
 
 const userSchema = new mongoose.Schema ({
   name: String,

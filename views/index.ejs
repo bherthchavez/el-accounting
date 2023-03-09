@@ -44,7 +44,7 @@
                    
                       <%suppFound.forEach(function(supp){%>
                       <label class="form-selectgroup-item flex-fill">
-                        <input type="radio" name="form-payment" value="<%=supp._id%>" class="form-selectgroup-input" required/>
+                        <input type="radio" name="supplier" value="<%=supp._id%>" class="form-selectgroup-input" required/>
                         <div class="form-selectgroup-label d-flex align-items-center p-3">
                           <div class="me-3">
                             <span class="form-selectgroup-check"></span>
@@ -55,9 +55,11 @@
                         </div>
                       </label>
                       <%})%>
-                
                   <div class="mt-4 text-end">
+                   
                       <a href="" class="btn btn-primary w-50 fs-h3 createBill" > Create bill <i class="ti ti-chevron-right fs-h3 ms-2"></i></a>
+                   
+                  </div>
                     </form>
                     
                <% } else { %>   
@@ -427,6 +429,7 @@
               <%})%>
               <div class="mt-4 text-end">
                   <a href="" class="btn btn-primary w-50 fs-h3 payBill" > Pay Supplier <i class="ti ti-chevron-right fs-h3 ms-2"></i></a>
+              </div>
                 </form>
               </div>
           <%}%>
